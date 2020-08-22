@@ -1,0 +1,28 @@
+{
+    "name": "dainsys/qa_app",
+    "description": "A Quality Audit Application based on Laravel",
+    "type": "project",
+    "require": {
+        "orchestra/testbench": "^5.4"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yismen Jorge",
+            "email": "yismen.jorge@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dainsys\\QAApp\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dainsys\\QAApp\\Tests\\": "./tests/"
+        }
+    }
+}
