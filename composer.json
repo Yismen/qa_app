@@ -1,9 +1,19 @@
 {
     "name": "dainsys/qa_app",
     "description": "A Quality Audit Application based on Laravel",
-    "type": "project",
+    "type": "library",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dainsys\\QAApp\\QAAppServiceProvider"
+            ],
+            "aliases": {
+                "QAApp": "Dainsys\\QAApp\\QAAFacade"
+            }
+        }
+    },
     "require": {
-        "orchestra/testbench": "^5.4"
+        "dainsys/locky": "^1.1"
     },
     "require-dev": {
         "orchestra/testbench": "^5.4"
