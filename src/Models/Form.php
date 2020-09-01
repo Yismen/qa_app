@@ -6,5 +6,5 @@ class Form extends BaseModel
 {
     protected $table = 'qa_app_forms';
 
-    protected $fillable = ['name', 'goal'];
+    protected $fillable = ['name', 'goal_percentage'];
 }
