@@ -36,13 +36,6 @@ class FormTests extends AppTestCase
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_create()
-    {
-        $this->get(route('qa_app.form.create'))
-            ->assertRedirect(route('login'));
-    }
-
-    /** @test */
     public function guest_are_not_allowed_to_store()
     {
         $this->post(route('qa_app.form.store'))
@@ -72,15 +65,6 @@ class FormTests extends AppTestCase
         $this->get(route('qa_app.form.show', $form->id))
             ->assertViewIs('qa_app::forms.show')
             ->assertViewHas('form', $form);
-    }
-
-    /** @test */
-    public function it_creates_a_form()
-    {
-        $this->actingAs($this->user());
-
-        $this->get(route('qa_app.form.create'))
-            ->assertViewIs('qa_app::forms.create');
     }
 
     /** @test */

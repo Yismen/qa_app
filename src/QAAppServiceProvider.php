@@ -2,7 +2,9 @@
 
 namespace Dainsys\QAApp;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use phpDocumentor\Reflection\Types\This;
 
 class QAAppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class QAAppServiceProvider extends ServiceProvider
         ]);
 
         // $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'timy');
+        $this->registerGates();
     }
 
     public function register()
@@ -31,5 +34,20 @@ class QAAppServiceProvider extends ServiceProvider
             __DIR__ . '/../config/dainsys_qa_app.php',
             'qa_app'
         );
+    }
+
+    protected function registerGates()
+    {
+        Gate::define('qa_app.is_admin', function () {
+            return auth()->user()->hasAnyRole(config('qa_app.roles.admin'));
+        });
+        Gate::define('qa_app.is_auditor', function () {
+            return auth()->user()->hasAnyRole(config('qa_app.roles.auditor'));
+        });
+        Gate::define('qa_app.is_user', function () {
+            return auth()->user()->hasAnyRole(config('qa_app.roles.user'));
+        });
+
+        return $this;
     }
 }

@@ -36,13 +36,6 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_create()
-    {
-        $this->get(route('qa_app.question_option.create'))
-            ->assertRedirect(route('login'));
-    }
-
-    /** @test */
     public function guest_are_not_allowed_to_store()
     {
         $this->post(route('qa_app.question_option.store'))
@@ -71,15 +64,6 @@ class QuestionOptionTests extends AppTestCase
         $this->get(route('qa_app.question_option.show', $question_option->id))
             ->assertViewIs('qa_app::question_options.show')
             ->assertViewHas('question_option', $question_option);
-    }
-
-    /** @test */
-    public function it_creates_a_question_option()
-    {
-        $this->actingAs($this->user());
-
-        $this->get(route('qa_app.question_option.create'))
-            ->assertViewIs('qa_app::question_options.create');
     }
 
     /** @test */

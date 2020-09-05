@@ -1,6 +1,6 @@
 <?php
 
-namespace Dainsys\QAApp\Controllers;
+namespace Dainsys\QAApp\Http\Controllers;
 
 use Dainsys\QAApp\Models\Question;
 

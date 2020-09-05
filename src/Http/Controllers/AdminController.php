@@ -1,6 +1,6 @@
 <?php
 
-namespace Dainsys\QAApp\Controllers;
+namespace Dainsys\QAApp\Http\Controllers;
 
 class AdminController extends BaseController
 {
