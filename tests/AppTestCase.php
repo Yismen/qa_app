@@ -12,6 +12,7 @@ use Orchestra\Testbench\TestCase;
 
 use App\User;
 use Dainsys\Locky\LockyServiceProvider;
+use Dainsys\Locky\Role;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use Spatie\Permission\PermissionServiceProvider;
@@ -51,6 +52,17 @@ class AppTestCase extends TestCase
     public function user()
     {
         return factory(app('App\User'))->create();
+    }
+
+    public function authorizedUser($role)
+    {
+        $user = factory(app('App\User'))->create();
+
+        $user->roles()->create([
+            'name' => $role
+        ]);
+
+        return $user;
     }
 
     public function make($model, array $attributes = [], $amount = null)

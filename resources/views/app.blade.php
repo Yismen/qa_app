@@ -1,1 +1,0 @@
-@extends(config('qa_app.default_layout'))
