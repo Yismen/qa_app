@@ -3,6 +3,7 @@
 namespace Dainsys\QAApp\Tests\Feature;
 
 use Dainsys\QAApp\Models\QuestionOption;
+use Dainsys\QAApp\Repositories\QuestionOptionRepository;
 use Dainsys\QAApp\Tests\AppTestCase;
 
 class QuestionOptionTests extends AppTestCase
@@ -43,22 +44,169 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function it_shows_a_list_of_question_options()
+    public function it_validates_fields_are_required()
+    {
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
+        $attributes = $this->make(QuestionOption::class, ['name' => '', 'value' => '', 'question_type_id' => '']);
+
+        $this->post(route('qa_app.question_option.store'), $attributes)
+            ->assertSessionHasErrors('name')
+            ->assertSessionHasErrors('value')
+            ->assertSessionHasErrors('question_type_id');
+
+        $question_option = $this->create(QuestionOption::class);
+        $this->put(route('qa_app.question_option.update', $question_option->id), $attributes)
+            ->assertSessionHasErrors('name')
+            ->assertSessionHasErrors('value')
+            ->assertSessionHasErrors('question_type_id');
+    }
+
+    /** @test */
+    public function it_validates_fields_must_be_unique()
+    {
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
+        $question_option = $this->create(QuestionOption::class);
+        $second_question_option = $this->create(QuestionOption::class);
+        // $attributes = $this->create(QuestionOption::class, ['name' => 'Repeated']);
+
+        $this->post(route('qa_app.question_option.store'), ['name' => $question_option->name])
+            ->assertSessionHasErrors('name');
+
+        $this->put(route('qa_app.question_option.update', $question_option->id), ['name' => $second_question_option->name])
+            ->assertSessionHasErrors('name');
+
+        // Except when updating itself
+        $this->put(route('qa_app.question_option.update', $question_option->id), ['name' => $question_option->name])
+            ->assertSessionDoesntHaveErrors('name');
+    }
+
+    /** @test */
+    public function it_validates_fields_exists()
+    {
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
+        $attributes = $this->make(QuestionOption::class, ['question_type_id' => 444]);
+
+        $this->post(route('qa_app.question_option.store'), $attributes)
+            ->assertSessionHasErrors('question_type_id');
+
+        $question_option = $this->create(QuestionOption::class);
+        $this->put(route('qa_app.question_option.update', $question_option->id), $attributes)
+            ->assertSessionHasErrors('question_type_id');
+    }
+
+    /** @test */
+    public function it_validates_numeric()
+    {
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
+        $attributes = $this->make(QuestionOption::class, ['value' => 'Not Numeric']);
+
+        $this->post(route('qa_app.question_option.store'), $attributes)
+            ->assertSessionHasErrors('value');
+
+        $question_option = $this->create(QuestionOption::class);
+        $this->put(route('qa_app.question_option.update', $question_option->id), $attributes)
+            ->assertSessionHasErrors('value');
+    }
+
+    /** @test */
+    public function it_validates_min_number()
+    {
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
+        $attributes = $this->make(QuestionOption::class, ['value' => -0.1]);
+
+        $this->post(route('qa_app.question_option.store'), $attributes)
+            ->assertSessionHasErrors('value');
+
+        $question_option = $this->create(QuestionOption::class);
+        $this->put(route('qa_app.question_option.update', $question_option->id), $attributes)
+            ->assertSessionHasErrors('value');
+    }
+
+    /** @test */
+    public function it_validates_max_number()
+    {
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
+        $attributes = $this->make(QuestionOption::class, ['value' => 1.1]);
+
+        $this->post(route('qa_app.question_option.store'), $attributes)
+            ->assertSessionHasErrors('value');
+
+        $question_option = $this->create(QuestionOption::class);
+        $this->put(route('qa_app.question_option.update', $question_option->id), $attributes)
+            ->assertSessionHasErrors('value');
+    }
+
+    /** @test */
+    public function unauthorized_users_cant_view_index()
     {
         $this->actingAs($this->user());
-        $this->create(QuestionOption::class);
 
-        $question_options = QuestionOption::all();
+        $response = $this->get(route('qa_app.question_option.index'));
+
+        $response->assertForbidden();
+    }
+
+    /** @test */
+    public function unauthorized_users_cant_view_single_question_option()
+    {
+        $this->actingAs($this->user());
+        $question_option = factory(QuestionOption::class)->create();
+
+        $this->get(route('qa_app.question_option.show', $question_option->id))
+            ->assertForbidden();
+    }
+
+    /** @test */
+    public function auauthorized_users_cant_store_question_option()
+    {
+        $this->actingAs($this->user());
+        $attributes = $this->make(QuestionOption::class);
+
+        $this->post(route('qa_app.question_option.store'), $attributes)
+            ->assertForbidden();
+    }
+
+    /** @test */
+    public function auntuahorized_users_cant_edit_a_question_option()
+    {
+        $this->actingAs($this->user());
+        $question_option = $this->create(QuestionOption::class);
+
+        $this->get(route('qa_app.question_option.edit', $question_option->id))
+            ->assertForbidden();
+    }
+
+    /** @test */
+    public function unauntuahorized_users_cant_update_a_question_option()
+    {
+        $this->actingAs($this->user());
+
+        $question_option = $this->create(QuestionOption::class);
+        $attributes = $this->make(QuestionOption::class);
+
+        $this->put(route('qa_app.question_option.update', $question_option->id), $attributes)
+            ->assertForbidden();
+    }
+
+    /** @test */
+    public function it_shows_a_list_of_question_options()
+    {
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
+        $this->create(QuestionOption::class, [], 2);
+
+        $question_options = QuestionOptionRepository::all();
 
         $this->get(route('qa_app.question_option.index'))
             ->assertViewIs('qa_app::question_options.index')
-            ->assertViewHas('question_options', $question_options);
+            ->assertViewHas('question_options', $question_options)
+            ->assertViewHas('questionTypesList', (new QuestionOption())->questionTypesList);
     }
 
     /** @test */
     public function it_shows_a_single_question_option()
     {
-        $this->actingAs($this->user());
+        $this->withoutExceptionHandling();
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $question_option = factory(QuestionOption::class)->create();
 
         $this->get(route('qa_app.question_option.show', $question_option->id))
@@ -69,37 +217,38 @@ class QuestionOptionTests extends AppTestCase
     /** @test */
     public function it_stores_a_question_option()
     {
-        $this->actingAs($this->user());
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(QuestionOption::class);
 
-        $this->post(route('qa_app.question_option.store', $attributes))
+        $this->post(route('qa_app.question_option.store'), $attributes)
             ->assertRedirect(route('qa_app.question_option.index'));
 
-        $this->assertDatabaseHas((new QuestionOption())->getTable(), $attributes);
+        $this->assertDatabaseHas((new QuestionOption)->getTable(), $attributes);
     }
 
     /** @test */
     public function it_edits_a_question_option()
     {
-        $this->actingAs($this->user());
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $question_option = $this->create(QuestionOption::class);
 
         $this->get(route('qa_app.question_option.edit', $question_option))
             ->assertViewIs('qa_app::question_options.edit')
-            ->assertViewHas('question_option', $question_option);
+            ->assertViewHas('question_option', $question_option)
+            ->assertViewHas('questionTypesList', $question_option->questionTypesList);
     }
 
     /** @test */
     public function it_updates_a_question_option()
     {
-        $this->actingAs($this->user());
+        $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
 
         $question_option = $this->create(QuestionOption::class);
-        $attributes = ['name' => 'Update Name'];
+        $attributes = $this->make(QuestionOption::class, ['name' => 'Update Name']);
 
         $this->put(route('qa_app.question_option.update', $question_option->id), $attributes)
             ->assertRedirect(route('qa_app.question_option.index'));
 
-        $this->assertDatabaseHas((new QuestionOption())->getTable(), $attributes);
+        $this->assertDatabaseHas((new QuestionOption)->getTable(), $attributes);
     }
 }

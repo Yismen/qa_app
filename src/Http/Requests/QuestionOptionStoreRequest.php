@@ -4,7 +4,7 @@ namespace Dainsys\QAApp\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateQuestionTypeRequest extends FormRequest
+class QuestionOptionStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class UpdateQuestionTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|unique:qa_app_question_types,name,' . request('question_type')->id,
+            'name' => 'required|min:2|unique:qa_app_question_options,name',
+            'value' => 'required|numeric|min:0|max:1',
+            'question_type_id' => 'required|exists:qa_app_question_types,id'
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Dainsys\QAApp\Http\Controllers;
 
-use Dainsys\QAApp\Http\Requests\StoreQuestionTypeRequest;
-use Dainsys\QAApp\Http\Requests\UpdateQuestionTypeRequest;
+use Dainsys\QAApp\Http\Requests\QuestionTypeStoreRequest;
+use Dainsys\QAApp\Http\Requests\QuestionTypeUpdateRequest;
 use Dainsys\QAApp\Models\QuestionType;
 use Dainsys\QAApp\Repositories\QuestionTypeRepository;
 use Illuminate\Routing\Controller;
@@ -40,7 +40,7 @@ class QuestionTypeController extends Controller
         return view('qa_app::question_types.create');
     }
 
-    public function store(StoreQuestionTypeRequest $request)
+    public function store(QuestionTypeStoreRequest $request)
     {
         if (Gate::denies('qa_app.is_admin')) {
             abort(403);
@@ -60,7 +60,7 @@ class QuestionTypeController extends Controller
         ]);
     }
 
-    public function update(UpdateQuestionTypeRequest $request, QuestionType $question_type)
+    public function update(QuestionTypeUpdateRequest $request, QuestionType $question_type)
     {
         if (Gate::denies('qa_app.is_admin')) {
             abort(403);
