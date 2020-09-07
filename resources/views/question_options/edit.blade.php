@@ -16,26 +16,10 @@
                 <div class="card-body">
                     <x-dc-form route="{{ route('qa_app.question_option.update', $question_option->id) }}">  
                         @method('PUT')
-                        <x-dc-input-field-addon
-                            :field-value="old('name', optional($question_option ?? null)->name)" 
-                            field-name="name" 
-                            label-name="Question Option:"
-                            button-action="SAVE"
-                            btn-class="btn-warning"
-                        />      
-                    </x-dc-form> 
-                </div>
+                        @include('qa_app::question_options._form')
 
-                <div class="card-footer bg-white">
-                    <h5>Question Options</h5>
-                    <ul class="list-group">
-                        @foreach ($question_option->questionOptions as $question_option)
-                            <li class="list-group-item d-flex justify-content-between align-items-center py-2">
-                                {{ $question_option->name }}
-                                <span class="badge badge-secondary badge-pill">{{ $question_option->value }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
+                       <button type="submit" class="btn btn-warning">UPDATE</button>    
+                    </x-dc-form> 
                 </div>
             </div>
         </div>

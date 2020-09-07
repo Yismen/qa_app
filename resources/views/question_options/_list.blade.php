@@ -7,7 +7,8 @@
             <thead class="thead-inverse">
                 <tr>
                     <th>Question Option:</th>
-                    <th>Question Options:</th>
+                    <th>Value %:</th>
+                    <th>Question Type:</th>
                     <th>Actions:</th>
                 </tr>
                 </thead>
@@ -20,9 +21,10 @@
                             </a>
                         </td>
                         <td>
-                            @foreach ($question_option->questionOptions as $question_option)
-                                <span class="badge badge-secondary">{{ $question_option->name }}</span>
-                            @endforeach
+                            {{ number_format($question_option->value, 2) }}%
+                        </td>
+                        <td>
+                            {{ optional($question_option->questionType)->name }}
                         </td>
                         <td>
                             <a href="{{ route('qa_app.question_option.edit', $question_option->id) }}" class="btn btn-warning btn-sm">

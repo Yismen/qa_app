@@ -12,12 +12,14 @@
                 <div class="card-body">
                     <x-dc-form route="{{ route('qa_app.question_option.store') }}">  
                        @include('qa_app::question_options._form')
+
+                       <button type="submit" class="btn btn-primary">CREATE</button>
                     </x-dc-form> 
                 </div>
             </div>
         </div>
         <div class="col-sm-12 col-md-10 col-lg-8">
-            {{-- @include('qa_app::question_options._list') --}}
+            @include('qa_app::question_options._list')
         </div>
     </div>
 </div>

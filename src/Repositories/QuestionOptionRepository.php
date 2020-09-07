@@ -8,7 +8,7 @@ class QuestionOptionRepository
 {
     public static function all()
     {
-        return QuestionOption::orderBy('question_type_id')->orderBy('name')
+        return QuestionOption::orderBy('question_type_id', 'DESC')->orderBy('value', 'DESC')
             ->with('questionType')
             ->get();
     }

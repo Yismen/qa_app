@@ -15,7 +15,7 @@ class QuestionOption extends BaseModel
         return $this->belongsTo(QuestionType::class);
     }
 
-    public function getQuestionTypesList()
+    public function getQuestionTypesListAttribute()
     {
         return QuestionType::orderBy('name')->pluck('name', 'id');
     }

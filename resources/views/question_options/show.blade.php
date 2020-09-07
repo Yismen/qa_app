@@ -12,16 +12,24 @@
                     </h4>
                 </div>
 
-                <div class="card-body">
-                    <h5>Question Options</h5>
-                    <ul class="list-group">
-                        @foreach ($question_option->questionOptions as $question_option)
-                            <li class="list-group-item d-flex justify-content-between align-items-center py-2">
-                                {{ $question_option->name }}
-                                <span class="badge badge-secondary badge-pill">{{ $question_option->value }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
+                <div class="card-body p-0">
+                    <table class="table mb-0">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="text-left">Value %</th>
+                                <td class="text-right">{{ number_format($question_option->value, 2) }}%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-left">Question Type</th>
+                                <td class="text-right">
+                                    <a href="{{ route('qa_app.question_type.show', optional($question_option->questionType)->id) }}" target="_question_type">
+                                        {{ optional($question_option->questionType)->name }}
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                 </div>
 
                 <div class="card-footer bg-white">
