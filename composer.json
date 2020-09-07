@@ -13,7 +13,8 @@
         }
     },
     "require": {
-        "dainsys/locky": "^1.1"
+        "dainsys/locky": "^1.1",
+        "dainsys/components": "^1.1"
     },
     "require-dev": {
         "orchestra/testbench": "^5.4"
