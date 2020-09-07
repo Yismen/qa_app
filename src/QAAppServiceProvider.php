@@ -21,8 +21,16 @@ class QAAppServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/qa_app'),
-        ]);
+            __DIR__ . '/../config/dainsys_qa_app.php' => config_path('dainsys_qa_app.php'),
+        ], 'qa_app.config');
+
+        $this->publishes([
+            __DIR__ . '/../migrations/' => resource_path('views/vendor/qa_app'),
+        ], 'qa_app.views');
+
+        $this->publishes([
+            __DIR__ . '/../resources/views/' => resource_path('views/vendor/qa_app'),
+        ], 'qa_app.migrations');
 
         // $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'timy');
         $this->registerGates();
