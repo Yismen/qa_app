@@ -7,8 +7,9 @@
             <thead class="thead-inverse">
                 <tr>
                     <th>QA Form:</th>
-                    <th>Passing Goal %:</th>
                     <th>Questions:</th>
+                    <th>Total Points:</th>
+                    <th>Passing Goal %:</th>
                     <th>Actions:</th>
                 </tr>
                 </thead>
@@ -21,10 +22,13 @@
                             </a>
                         </td>
                         <td>
-                            {{ number_format($form->goal_percentage * 100, 2) }}%
+                            <span class="badge badge-secondary">{{ $form->questions->count() }}</span>
                         </td>
                         <td>
-                            <span class="badge badge-secondary">{{ $form->questions->count() }}</span>
+                            <span class="badge badge-secondary">{{ number_format($form->questions()->sum('points'), 2) }}</span>
+                        </td>
+                        <td>
+                            {{ number_format($form->goal_percentage * 100, 2) }}%
                         </td>
                         <td>
                             <a href="{{ route('qa_app.form.edit', $form->id) }}" class="btn btn-warning btn-sm">

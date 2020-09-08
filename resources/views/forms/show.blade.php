@@ -16,17 +16,13 @@
                     <table class="table mb-0">
                         <tbody>
                             <tr>
+                                <th scope="row" class="text-left">Total Points</th>
+                                <td class="text-right">{{ number_format($form->questions()->sum('points'), 2) }}</td>
+                            </tr>
+                            <tr>
                                 <th scope="row" class="text-left">Passing Goal %</th>
                                 <td class="text-right">{{ number_format($form->goal_percentage * 100, 2) }}%</td>
                             </tr>
-                            {{-- <tr>
-                                <th scope="row" class="text-left">Question Type</th>
-                                <td class="text-right">
-                                    <a href="{{ route('qa_app.question_type.show', optional($form->questionType)->id) }}" target="_question_type">
-                                        {{ optional($form->questionType)->name }}
-                                    </a>
-                                </td>
-                            </tr> --}}
                         </tbody>
                     </table>
                     
