@@ -210,7 +210,6 @@ class QuestionTests extends AppTestCase
     /** @test */
     public function it_shows_a_single_question()
     {
-        $this->withoutExceptionHandling();
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $question = factory(Question::class)->create();
 
