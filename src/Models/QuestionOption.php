@@ -17,6 +17,6 @@ class QuestionOption extends BaseModel
 
     public function getQuestionTypesListAttribute()
     {
-        return QuestionType::orderBy('name')->pluck('name', 'id');
+        return QuestionTypeRepository::list();
     }
 }
