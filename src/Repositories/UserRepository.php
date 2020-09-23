@@ -2,11 +2,11 @@
 
 namespace Dainsys\QAApp\Repositories;
 
-use Dainsys\QAApp\Models\QuestionType;
+use Dainsys\QAApp\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 
-class QuestionTypeRepository implements QAAppRepositoryInterface
+class UserRepository implements QAAppRepositoryInterface
 {
     public static function all(): Collection
     {
@@ -15,7 +15,8 @@ class QuestionTypeRepository implements QAAppRepositoryInterface
 
     public static function list(): SupportCollection
     {
-        return QuestionType::orderBy('name')->pluck('name', 'id');
+        return resolve('App\User')::orderBy('name')
+            ->pluck('name', 'id');
     }
 
     public static function find(int $id)
@@ -25,7 +26,7 @@ class QuestionTypeRepository implements QAAppRepositoryInterface
 
     public static function query()
     {
-        return QuestionType::orderBy('name')
-            ->with('questionOptions');
+        return resolve('Ap\User')::orderBy('name')
+            ->with('questions');
     }
 }

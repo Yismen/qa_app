@@ -10,4 +10,8 @@ interface QAAppRepositoryInterface
     public static function all(): Collection;
 
     public static function list(): SupportCollection;
+
+    public static function find(int $id);
+
+    public static function query();
 }

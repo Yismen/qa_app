@@ -2,20 +2,15 @@
 
 namespace Dainsys\QAApp\Repositories;
 
-use Dainsys\QAApp\Models\QuestionType;
+use Dainsys\QAApp\Models\Audit;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 
-class QuestionTypeRepository implements QAAppRepositoryInterface
+class AuditRepository
 {
     public static function all(): Collection
     {
         return self::query()->get();
-    }
-
-    public static function list(): SupportCollection
-    {
-        return QuestionType::orderBy('name')->pluck('name', 'id');
     }
 
     public static function find(int $id)
@@ -25,7 +20,7 @@ class QuestionTypeRepository implements QAAppRepositoryInterface
 
     public static function query()
     {
-        return QuestionType::orderBy('name')
-            ->with('questionOptions');
+        return Audit::orderBy('form_id')->orderBy('production_date', 'DESC')->orderBy('points')
+            ->with('user', 'form');
     }
 }

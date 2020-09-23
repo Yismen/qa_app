@@ -15,4 +15,7 @@ Route::prefix('qa_app')
         Route::resource('form', 'FormController')->except(['create', 'destroy'])->names('qa_app.form');
 
         Route::resource('question', 'QuestionController')->except(['create', 'destroy'])->names('qa_app.question');
+
+        Route::resource('audit', 'AuditController')->except(['create', 'destroy'])->names('qa_app.audit');
+        Route::post('audit/create', 'AuditController@create')->name('qa_app.audit.create');
     });
