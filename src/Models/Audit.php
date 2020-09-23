@@ -15,6 +15,7 @@ class Audit extends BaseModel
         'user_id',
         'production_date',
         'max_points',
+        'passes',
         'points',
         'data',
     ];
@@ -23,7 +24,7 @@ class Audit extends BaseModel
 
     protected $dates = ['production_date'];
 
-    protected $appends = ['points_goal', 'passes'];
+    protected $appends = ['points_goal'];
 
     protected $casts = [
         'passes' => 'boolean'

@@ -1,3 +1,4 @@
+{{ dump($audits) }}
 {{-- <div class="card">
     <div class="card-header bg-white">
         <h4>Audits List</h4>

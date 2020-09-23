@@ -1,3 +1,4 @@
+{{ dump($audit) }}
 {{-- @extends('qa_app::app')
 
 @section('content')

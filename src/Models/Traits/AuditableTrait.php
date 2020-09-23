@@ -2,6 +2,7 @@
 
 namespace Dainsys\QAApp\Models\Traits;
 
+use Dainsys\QAApp\Models\Form;
 use Dainsys\QAApp\Models\Question;
 use Dainsys\QAApp\Models\QuestionOption;
 use Dainsys\QAApp\Repositories\FormRepository;
@@ -26,19 +27,18 @@ trait AuditableTrait
         return  $this->max_points * optional($this->form)->goal_percentage;
     }
 
-    public function getPassesAttribute()
-    {
-        return $this->points >= $this->points_goal;
-    }
-
     public static function getAdditionalFields(Request $request): array
     {
         $questions = Question::whereIn('id', array_keys((array) $request->answers))->with('questionType')->get();
+        $form = Form::findOrFail($request->form_id);
         $points = self::getTotalPoints($request, $questions);
+        $max_points = $questions->sum('points');
+        $points_goal = $max_points * $form->goal_percentage;
 
         return [
-            'max_points' => $questions->sum('points'),
+            'max_points' => $max_points,
             'points' => $points,
+            'passes' => $points >=  $points_goal,
             'data' => self::getAnswersData((array)$request->answers),
         ];
     }
