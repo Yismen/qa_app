@@ -20,3 +20,7 @@ Each question has a value. The portion of points of each question will be determ
 1. Create QA Forms using route `.../qa_app/form`. Forms are the master piece of the process. They hold the results of each evaluation. 
 1 Define the percentage of points required to pass the audit. In other words, what percentage of the sum of points of the questions associated to a form needs to be reached to pass an audit.
 1. Create all the questions and associate them to a form and to a question type using route `.../qa_app/question_question`. Assign how many points each question weights withing the audit form.
+1. Create app roles and assign them to your users in route `/locky/roles`:
+1 For Admin users, default role name is `QA App Admin` as defined in the package config file. Feel free to publish and update as needed.
+1 For Auditor users, default role name is `QA App Auditor` as defined in the package config file. Feel free to publish and update as needed.
+1 For User users, default role name is `QA App User` as defined in the package config file. Feel free to publish and update as needed.
