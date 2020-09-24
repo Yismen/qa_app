@@ -10,9 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <x-dc-form route="{{ route('qa_app.audit.create') }}">  
-                       {{-- @include('qa_app::audits._form') --}}
-                       
+                    <x-dc-form route="{{ route('qa_app.audit.select') }}">  
                        <div class="row">
                            <div class="col-sm-6">
                                 <x-dc-select-field
@@ -33,13 +31,12 @@
                             </div>
                        </div>
 
-                       <button type="submit" class="btn btn-primary">START AUDIT</button>
+                       <button type="submit" class="btn btn-info">START AUDIT</button>
                     </x-dc-form> 
                 </div>
             </div>
         </div>
         <div class="col-sm-12 col-md-10 col-lg-8">
-            @include('qa_app::audits._dashboard')
             @include('qa_app::audits._list')
         </div>
     </div>

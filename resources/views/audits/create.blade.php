@@ -7,51 +7,20 @@
             <div class="card">
                 <div class="card-header bg-white">
                     Complete an Audit
+
+                    <a name="cancel_audit" id="cancel_audit" class="btn btn-danger float-right btn-sm" href="{{ route('qa_app.audit.index') }}" title="Cancel Audit" role="button" onclick="closeAuditForm(event)">X</a>
                 </div>
 
                 <div class="card-body">
                     <x-dc-form route="{{ route('qa_app.audit.store') }}">  
-                       <div class="row">
-                           <div class="col-sm-4">
-                            <x-dc-select-field
-                                    :field-value="old('form_id', optional($form ?? null)->id)" 
-                                    field-name="form_id" 
-                                    label-name="Form:"
-                                    :data-array="[old('form_id', optional($form ?? null)->id) => optional($form ?? null)->name]"
-                                    readonly="readonly"
-                                />                        
-                            </div>
-                            <div class="col-sm-4">
-                                <x-dc-select-field
-                                    :field-value="old('user_id', optional($user ?? null)->id)" 
-                                    field-name="user_id" 
-                                    label-name="User:"
-                                    :data-array="[old('user_id', optional($user ?? null)->id) => optional($user ?? null)->name]"
-                                    readonly="readonly"
-                                />
-                            </div>
-                            <div class="col-sm-4">
-                                <x-dc-input-field
-                                    type="date"
-                                    :field-value="old('production_date', optional($audit ?? null)->production_date)" 
-                                    field-name="production_date" 
-                                    label-name="Date:"
-                                />
-                            </div>
-                       </div>
-                       <ul class="list-group">
-                           @foreach ($form->questions as $question)
-                            <li class="list-group-item py-2">                                
-                                <x-dc-select-field
-                                    :field-value="old('answers.*', optional($question ?? null)->value)" 
-                                    field-name="answers[{{ $question->id }}]" 
-                                    label-name="{{ $question->text }}:"
-                                    :data-array="$question->questionType->questionOptions()->pluck('name', 'id')"
-                                />    
-                            </li>                               
-                           @endforeach
-                       </ul>
-                       <button type="submit" class="btn btn-primary">START AUDIT</button>
+                       @include('qa_app::audits._form')
+                       
+                    @error('answers')
+                        <p class="text-sm text-danger m-2">
+                            <strong>{{ $message }}</strong>
+                        </p>
+                    @enderror
+                       <button type="submit" class="btn btn-primary mt-3">SAVE AUDIT</button>
                     </x-dc-form> 
                 </div>
             </div>
@@ -61,5 +30,14 @@
 @endsection
 
 @push('scripts')
-    
+    <script defer>
+        function closeAuditForm(event) {
+            event.preventDefault()
+            let url = event.target.href
+
+            if (confirm("Changes will be discarded. Are you sure?")) {
+                location.replace(url)
+            }
+        }
+    </script>
 @endpush

@@ -15,6 +15,7 @@ class Audit extends BaseModel
         'user_id',
         'production_date',
         'max_points',
+        'points_goal',
         'passes',
         'points',
         'data',
@@ -23,8 +24,6 @@ class Audit extends BaseModel
     protected $table = 'qa_app_audits';
 
     protected $dates = ['production_date'];
-
-    protected $appends = ['points_goal'];
 
     protected $casts = [
         'passes' => 'boolean'

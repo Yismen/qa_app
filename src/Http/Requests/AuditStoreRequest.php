@@ -27,6 +27,16 @@ class AuditStoreRequest extends FormRequest
             'form_id' => 'required|exists:qa_app_forms,id',
             'user_id' => 'required|exists:users,id',
             'production_date' => 'required|date',
+            'answers' => 'required|array',
+            'answers.*' => 'required|exists:qa_app_question_options,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'answers.required' => "This form does not have questions assigned. Please create some questions!",
+            'answers.*.required' => 'Please select one!'
         ];
     }
 }

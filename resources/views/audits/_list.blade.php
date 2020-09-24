@@ -1,5 +1,4 @@
-{{ dump($audits) }}
-{{-- <div class="card">
+<div class="card">
     <div class="card-header bg-white">
         <h4>Audits List</h4>
     </div>
@@ -7,32 +6,41 @@
         <table class="table table-sm table-inverse table-responsive-sm mb-0">
             <thead class="thead-inverse">
                 <tr>
-                    <th>Audit:</th>
-                    <th>Value:</th>
+                    <th>Date:</th>
+                    <th>User:</th>
                     <th>QA Form:</th>
-                    <th>Type:</th>
-                    <th>Actions:</th>
+                    <th>Points:</th>
+                    <th>Passes:</th>
+                    <th colspan="2">Actions:</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach ($audits as $audit)
-                    <tr>
+                    <tr class="{{ $audit->passes  ? '' : 'text-danger'}}">
                         <td scope="row">
                             <a href="{{ route('qa_app.audit.show', $audit->id) }}">
-                                {{ $audit->text }}
+                                {{ $audit->production_date->format('Y-M-d') }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('qa_app.dashboard.user', $audit->user->id) }}" target="__dashboard">
+                                {{ optional($audit->user)->name }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('qa_app.dashboard.qa_form', $audit->form->id) }}" target="__dashboard">
+                                {{ $audit->form->name }}
                             </a>
                         </td>
                         <td>
                             {{ number_format($audit->points, 2) }}
                         </td>
                         <td>
-                            <a href="{{ route('qa_app.form.show', $audit->form->id) }}" target="_form">
-                                {{ $audit->form->name }}
-                            </a>
+                            {{ $audit->passes ? 'Passed' : 'Failed' }}
                         </td>
                         <td>
-                            <a href="{{ route('qa_app.audit_type.show', $audit->auditType->id) }}" target="_auditType">
-                                {{ $audit->auditType->name }}
+                            <a href="{{ route('qa_app.audit.show', $audit->id) }}" class="btn btn-secondary btn-sm">
+                                Details
                             </a>
                         </td>
                         <td>
@@ -45,4 +53,7 @@
                 </tbody>
         </table>
     </div>
-</div> --}}
+    @if ($audits->hasPages())
+        <div class="card-footer bg-white p-2">{{ $audits->links() }}</div>
+    @endif
+</div>

@@ -14,6 +14,7 @@ $factory->define(Audit::class, function (Faker $faker) {
         'production_date' => now(),
         'max_points' => 30,
         'points' => 28,
+        'points_goal' => 25,
         'passes' => true,
         'data' => null
     ];

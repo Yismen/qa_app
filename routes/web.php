@@ -6,7 +6,9 @@ Route::prefix('qa_app')
     ->middleware(['web', 'auth'])
     ->namespace('Dainsys\QAApp\Http\Controllers')
     ->group(function () {
-        Route::get('admin', 'AdminController')->name('qa_app.dashboards.admin');
+        Route::get('/', 'DashboardController@admin')->name('qa_app.dashboard.admin');
+        Route::get('dashboard/user/{id}', 'DashboardController@user')->name('qa_app.dashboard.user');
+        Route::get('dashboard/qa_form/{id}', 'DashboardController@form')->name('qa_app.dashboard.qa_form');
 
         Route::resource('question_type', 'QuestionTypeController')->except(['create', 'destroy'])->names('qa_app.question_type');
 
@@ -17,5 +19,6 @@ Route::prefix('qa_app')
         Route::resource('question', 'QuestionController')->except(['create', 'destroy'])->names('qa_app.question');
 
         Route::resource('audit', 'AuditController')->except(['create', 'destroy'])->names('qa_app.audit');
-        Route::post('audit/create', 'AuditController@create')->name('qa_app.audit.create');
+        Route::get('audit/create/form/{form_id}/user/{user_id}', 'AuditController@create')->name('qa_app.audit.create');
+        Route::post('audit/select', 'AuditController@select')->name('qa_app.audit.select');
     });

@@ -13,6 +13,11 @@ class AuditRepository
         return self::query()->get();
     }
 
+    public static function paginate($amount = 25)
+    {
+        return self::query()->paginate($amount);
+    }
+
     public static function find(int $id)
     {
         return self::query()->findOrFail($id);
@@ -20,7 +25,7 @@ class AuditRepository
 
     public static function query()
     {
-        return Audit::orderBy('form_id')->orderBy('production_date', 'DESC')->orderBy('points')
+        return Audit::orderBy('production_date', 'DESC')->orderBy('points')
             ->with('user', 'form');
     }
 }

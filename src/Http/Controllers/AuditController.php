@@ -19,7 +19,7 @@ class AuditController extends BaseController
         }
 
         return view('qa_app::audits.index', [
-            'audits' => AuditRepository::all(),
+            'audits' => AuditRepository::paginate(25),
             'formsList' => (new Audit())->formsList,
             'usersList' => (new Audit())->usersList
         ]);
@@ -36,15 +36,27 @@ class AuditController extends BaseController
         ]);
     }
 
-    public function create(AuditCreateRequest $request)
+    public function select(AuditCreateRequest $request)
+    {
+        if (Gate::denies('qa_app.is_auditor')) {
+            abort(403);
+        }
+
+        return redirect()->route('qa_app.audit.create', [
+            'form_id' => $request->form_id,
+            'user_id' => $request->user_id,
+        ]);
+    }
+
+    public function create($form_id, $user_id)
     {
         if (Gate::denies('qa_app.is_auditor')) {
             abort(403);
         }
 
         return view('qa_app::audits.create', [
-            'form' => Form::find($request->form_id)->load('questions.questionType.questionOptions'),
-            'user' => resolve('App\User')::find($request->user_id)
+            'form' => Form::find($form_id)->load('questions.questionType.questionOptions'),
+            'user' => resolve('App\User')::find($user_id)
         ]);
     }
 
@@ -53,7 +65,6 @@ class AuditController extends BaseController
         if (Gate::denies('qa_app.is_auditor')) {
             abort(403);
         }
-
         $request->merge(Audit::getAdditionalFields($request));
 
         Audit::create($request->all());
@@ -70,6 +81,7 @@ class AuditController extends BaseController
         return view('qa_app::audits.edit', [
             'audit' => $audit,
             'formsList' => $audit->formsList,
+            'usersList' => $audit->usersList,
             'auditTypesList' => $audit->auditTypesList
         ]);
     }
@@ -79,6 +91,8 @@ class AuditController extends BaseController
         if (Gate::denies('qa_app.is_auditor')) {
             abort(403);
         }
+
+        $request->merge(Audit::getAdditionalFields($request));
 
         $audit->update($request->all());
 

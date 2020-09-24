@@ -14,7 +14,10 @@ trait AuditableTrait
 
     public function getFormsListAttribute()
     {
-        return FormRepository::list();
+        return Form::orderBy('name')
+            ->whereHas('questions')
+            ->with('questions')
+            ->pluck('name', 'id');
     }
 
     public function getUsersListAttribute()
@@ -38,6 +41,7 @@ trait AuditableTrait
         return [
             'max_points' => $max_points,
             'points' => $points,
+            'points_goal' => $points_goal,
             'passes' => $points >=  $points_goal,
             'data' => self::getAnswersData((array)$request->answers),
         ];
@@ -52,7 +56,7 @@ trait AuditableTrait
             $question = Question::findOrFail($question_id);
             $answer = QuestionOption::findOrFail($answer_id);
 
-            $response[$i]['question'] = $question;
+            $response[$i]['question'] = $question->append('questionOptionsList');
             $response[$i]['answer'] = $answer;
             $response[$i]['question_value'] = $question->points;
             $response[$i]['answer_value'] = $answer->value;

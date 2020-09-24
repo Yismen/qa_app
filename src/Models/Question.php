@@ -3,6 +3,7 @@
 namespace Dainsys\QAApp\Models;
 
 use Dainsys\QAApp\Repositories\FormRepository;
+use Dainsys\QAApp\Repositories\QuestionOptionRepository;
 use Dainsys\QAApp\Repositories\QuestionTypeRepository;
 
 class Question extends BaseModel
@@ -29,5 +30,10 @@ class Question extends BaseModel
     public function getQuestionTypesListAttribute()
     {
         return QuestionTypeRepository::list();
+    }
+
+    public function getQuestionOptionsListAttribute()
+    {
+        return $this->questionType->questionOptions()->pluck('name', 'id');
     }
 }

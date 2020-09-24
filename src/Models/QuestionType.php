@@ -12,4 +12,9 @@ class QuestionType extends BaseModel
     {
         return $this->hasMany(QuestionOption::class);
     }
+
+    public function getQuestionOptionsListAttribute()
+    {
+        return QuestionOption::pluck('name', 'id');
+    }
 }

@@ -23,6 +23,7 @@ class CreateAuditsTable extends Migration
             $table->date('production_date');
             $table->double('max_points', 15, 8)->nullable();
             $table->double('points', 15, 8)->nullable();
+            $table->double('points_goal', 15, 8)->nullable();
             $table->boolean('passes')->default(false);
             $table->text('data')->nullable();
             $table->timestamps();

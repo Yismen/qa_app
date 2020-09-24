@@ -5,7 +5,6 @@ namespace Dainsys\QAApp\Tests\Feature;
 use Dainsys\QAApp\Models\Audit;
 use Dainsys\QAApp\Models\Form;
 use Dainsys\QAApp\Models\Question;
-use Dainsys\QAApp\Repositories\AuditRepository;
 use Dainsys\QAApp\Tests\AppTestCase;
 
 class AuditTests extends AppTestCase
@@ -120,13 +119,13 @@ class AuditTests extends AppTestCase
         $this->actingAs($this->authorizedUser(config('qa_app.roles.auditor')));
         $this->create(Audit::class, [], 2);
 
-        $audits = Audit::orderBy('form_id')->orderBy('created_at', 'DESC')
+        $audits = Audit::orderBy('production_date', 'DESC')->orderBy('points')
             ->with('user', 'form')
-            ->get();
+            ->paginate(25);
 
         $this->get(route('qa_app.audit.index'))
             ->assertViewIs('qa_app::audits.index')
-            ->assertViewHas('audits', $audits)
+            ->assertViewHas('audits')
             ->assertViewHas('formsList', (new Audit())->formsList)
             ->assertViewHas('usersList', (new Audit())->usersList);
     }

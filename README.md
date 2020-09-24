@@ -24,3 +24,4 @@ Each question has a value. The portion of points of each question will be determ
 1 For Admin users, default role name is `QA App Admin` as defined in the package config file. Feel free to publish and update as needed.
 1 For Auditor users, default role name is `QA App Auditor` as defined in the package config file. Feel free to publish and update as needed.
 1 For User users, default role name is `QA App User` as defined in the package config file. Feel free to publish and update as needed.
+1. Make sure your layouts view can recieve the javascripts by adding the `@stack('scripts')` directive.
