@@ -6,7 +6,7 @@
         <div class="col-sm-12 col-md-10 mb-3">
             <div class="card">
                 <div class="card-header bg-white">
-                    Complete an Audit
+                    {{ __('qa_app::audit.create.form.header') }}
 
                     <a name="cancel_audit" id="cancel_audit" class="btn btn-danger float-right btn-sm" href="{{ route('qa_app.audit.index') }}" title="Cancel Audit" role="button" onclick="closeAuditForm(event)">X</a>
                 </div>
@@ -20,7 +20,7 @@
                             <strong>{{ $message }}</strong>
                         </p>
                     @enderror
-                       <button type="submit" class="btn btn-primary mt-3">SAVE AUDIT</button>
+                       <button type="submit" class="btn btn-primary mt-3">{{ __('qa_app::audit.create.form.button') }}</button>
                     </x-dc-form> 
                 </div>
             </div>

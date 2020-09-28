@@ -1,17 +1,17 @@
 <div class="card">
     <div class="card-header bg-white">
-        <h4>Audits List</h4>
+        <h4>{{ __('qa_app::audit.list.header') }}</h4>
     </div>
     <div class="card-body p-0">
         <table class="table table-sm table-inverse table-responsive-sm mb-0">
             <thead class="thead-inverse">
                 <tr>
-                    <th>Date:</th>
-                    <th>User:</th>
-                    <th>QA Form:</th>
-                    <th>Points:</th>
-                    <th>Passes:</th>
-                    <th colspan="2">Actions:</th>
+                    <th>{{ __('qa_app::labels.production_date') }}</th>
+                    <th>{{ __('qa_app::labels.user') }}</th>
+                    <th>{{ __('qa_app::labels.qa_form') }}</th>
+                    <th>{{ __('qa_app::labels.points_possible') }}</th>
+                    <th>{{ __('qa_app::labels.pass_fail') }}</th>
+                    <th colspan="2">{{ __('qa_app::labels.actions') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,12 +40,12 @@
                         </td>
                         <td>
                             <a href="{{ route('qa_app.audit.show', $audit->id) }}" class="btn btn-secondary btn-sm">
-                                Details
+                                {{ __('qa_app::labels.details') }}
                             </a>
                         </td>
                         <td>
                             <a href="{{ route('qa_app.audit.edit', $audit->id) }}" class="btn btn-warning btn-sm">
-                                Edit
+                                {{ __('qa_app::labels.edit') }}
                             </a>
                         </td>
                     </tr>

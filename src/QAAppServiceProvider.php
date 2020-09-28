@@ -19,6 +19,7 @@ class QAAppServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'qa_app');
         $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'qa_app');
 
         $this->publishes([
             __DIR__ . '/../config/dainsys_qa_app.php' => config_path('dainsys_qa_app.php'),
@@ -32,7 +33,10 @@ class QAAppServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/views/' => resource_path('views/vendor/qa_app'),
         ], 'qa_app.migrations');
 
-        // $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'timy');
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/qa_app'),
+        ]);
+
         $this->registerGates();
     }
 

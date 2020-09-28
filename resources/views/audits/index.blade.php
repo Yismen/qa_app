@@ -6,7 +6,7 @@
         <div class="col-sm-12 col-md-10 col-lg-8 mb-3">
             <div class="card">
                 <div class="card-header bg-white">
-                    Create a New Audit
+                    {{ __('qa_app::audit.index.form.header') }}
                 </div>
 
                 <div class="card-body">
@@ -16,7 +16,7 @@
                                 <x-dc-select-field
                                     :field-value="old('form_id', optional($form_id ?? null)->form_id)" 
                                     field-name="form_id" 
-                                    label-name="Select a Form:"
+                                    label-name="{{ __('qa_app::labels.qa_form') }}"
                                     :data-array="$formsList"
                                 />
                         
@@ -25,13 +25,13 @@
                                 <x-dc-select-field
                                     :field-value="old('user_id', optional($user_id ?? null)->user_id)" 
                                     field-name="user_id" 
-                                    label-name="Select a User:"
+                                    label-name="{{ __('qa_app::labels.user') }}"
                                     :data-array="$usersList"
                                 />
                             </div>
                        </div>
 
-                       <button type="submit" class="btn btn-info">START AUDIT</button>
+                       <button type="submit" class="btn btn-info">{{ __('qa_app::audit.index.form.button') }}</button>
                     </x-dc-form> 
                 </div>
             </div>

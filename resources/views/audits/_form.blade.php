@@ -4,7 +4,7 @@
             class="bg-light"
              :field-value="old('form_id', optional($form ?? null)->id)" 
              field-name="form_id" 
-             label-name="Form:"
+             label-name="{{ __('qa_app::labels.qa_form') }}"
              :data-array="[old('form_id', optional($form ?? null)->id) => optional($form ?? null)->name]"
              readonly="readonly"
          />                        
@@ -14,7 +14,7 @@
              class="bg-light"
              :field-value="old('user_id', optional($user ?? null)->id)" 
              field-name="user_id" 
-             label-name="User:"
+             label-name="{{ __('qa_app::labels.user') }}"
              :data-array="[old('user_id', optional($user ?? null)->id) => optional($user ?? null)->name]"
              readonly="readonly"
          />
@@ -24,7 +24,7 @@
              type="date"
              :field-value="old('production_date', optional($audit ?? null)->production_date)" 
              field-name="production_date" 
-             label-name="Date:"
+             label-name="{{ __('qa_app::labels.production_date') }}"
          />
      </div>
 </div>

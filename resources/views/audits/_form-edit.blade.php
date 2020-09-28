@@ -3,7 +3,7 @@
          <x-dc-select-field
              :field-value="old('form_id', optional($audit ?? null)->form_id)" 
              field-name="form_id" 
-             label-name="Form:"
+             label-name="{{ __('qa_app::labels.qa_form') }}"
              :data-array="$formsList"
              readonly="readonly"
          />                        
@@ -12,7 +12,7 @@
          <x-dc-select-field
              :field-value="old('user_id', optional($audit ?? null)->user_id)" 
              field-name="user_id" 
-             label-name="User:"
+             label-name="{{ __('qa_app::labels.user') }}"
              :data-array="$usersList"
              readonly="readonly"
          />     
@@ -22,7 +22,7 @@
              type="date"
              :field-value="old('production_date', optional(optional($audit ?? null)->production_date)->format('Y-m-d'))" 
              field-name="production_date" 
-             label-name="Date:"
+             label-name="{{ __('qa_app::labels.production_date') }}"
          />
      </div>
 </div>
