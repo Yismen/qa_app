@@ -22,7 +22,9 @@
                             </a>
                         </td>
                         <td>
-                            <span class="badge badge-secondary">{{ $form->questions->count() }}</span>
+                            <span class="badge badge-{{ $form->questions->count() > 0 ? 'info text-white' : 'secondary' }}">
+                                {{ $form->questions->count() }}
+                            </span>
                         </td>
                         <td>
                             <span class="badge badge-secondary">{{ number_format($form->questions()->sum('points'), 2) }}</span>
