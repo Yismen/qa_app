@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header bg-white">
                     <h4>
-                        Question - {{ $question->text }}
-                        <a href="{{ route('qa_app.question.index') }}" class="float-right" title="Back to Questions List">All</a>
+                        {{ __('qa_app::question.headers.show') }} {{ $question->text }}
+                        <a href="{{ route('qa_app.question.index') }}" class="float-right" title="Back to Questions List">{{ __('qa_app::labels.all') }}</a>
                     </h4>
                 </div>
 
@@ -16,15 +16,15 @@
                     <table class="table mb-0">
                         <tbody>
                             <tr>
-                                <th scope="row" class="text-left">QA Form:</th>
+                                <th scope="row" class="text-left">{{ __('qa_app::labels.qa_form') }}</th>
                                 <td class="text-right">{{ $question->form->name }}%</td>
                             </tr>
                             <tr>
-                                <th scope="row" class="text-left">Question Type:</th>
+                                <th scope="row" class="text-left">{{ __('qa_app::labels.question_type') }}</th>
                                 <td class="text-right">{{ $question->questionType->name }}</td>
                             </tr>
                             <tr>
-                                <th scope="row" class="text-left">Question Value:</th>
+                                <th scope="row" class="text-left">{{ __('qa_app::labels.question_value') }}</th>
                                 <td class="text-right">{{ number_format($question->points, 2) }}</td>
                             </tr>
                         </tbody>
@@ -33,7 +33,7 @@
                 </div>
                 
                 <div class="card-footer bg-white">
-                    <a href="{{ route('qa_app.question.edit', $question->id) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route('qa_app.question.edit', $question->id) }}" class="btn btn-warning">{{ __('qa_app::labels.edit') }}</a>
                 </div>
             </div>
         </div>

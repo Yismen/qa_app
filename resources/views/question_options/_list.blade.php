@@ -7,7 +7,7 @@
             <thead class="thead-inverse">
                 <tr>
                     <th>{{ __('qa_app::labels.question_option') }}</th>
-                    <th>{{ __('qa_app::labels.question_value') }}</th>
+                    <th>{{ __('qa_app::labels.question_option_value') }}</th>
                     <th>{{ __('qa_app::labels.question_type') }}</th>
                     <th>{{ __('qa_app::labels.actions') }}</th>
                 </tr>
@@ -21,7 +21,7 @@
                             </a>
                         </td>
                         <td>
-                            {{ number_format($question_option->value, 2) }}%
+                            {{ number_format($question_option->value, 2) * 100 }}%
                         </td>
                         <td>
                             {{ optional($question_option->questionType)->name }}
