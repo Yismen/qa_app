@@ -14,6 +14,8 @@ return [
     'points_required' => 'Total Points Required to Pass:',
     'production_date' => 'Production Date:',
     'qa_form' => 'QA Form:',
+    'failed' => 'Failed',
+    'passed' => 'Passed',
     'question' => 'Question:',
     'question_type' => 'Question Type:',
     'question_option' => 'Question Option:',
