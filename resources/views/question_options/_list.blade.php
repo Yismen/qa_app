@@ -1,15 +1,15 @@
 <div class="card">
     <div class="card-header bg-white">
-        <h4>Question Options List</h4>
+        <h4>{{ __('qa_app::question_option.list.header') }}</h4>
     </div>
     <div class="card-body p-0">
         <table class="table table-sm table-inverse table-responsive-sm mb-0">
             <thead class="thead-inverse">
                 <tr>
-                    <th>Question Option:</th>
-                    <th>Value %:</th>
-                    <th>Question Type:</th>
-                    <th>Actions:</th>
+                    <th>{{ __('qa_app::labels.question_option') }}</th>
+                    <th>{{ __('qa_app::labels.question_value') }}</th>
+                    <th>{{ __('qa_app::labels.question_type') }}</th>
+                    <th>{{ __('qa_app::labels.actions') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,7 +28,7 @@
                         </td>
                         <td>
                             <a href="{{ route('qa_app.question_option.edit', $question_option->id) }}" class="btn btn-warning btn-sm">
-                                Edit
+                                {{ __('qa_app::labels.edit') }}
                             </a>
                         </td>
                     </tr>

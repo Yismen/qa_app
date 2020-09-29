@@ -6,14 +6,14 @@
         <div class="col-sm-12 col-md-10 col-lg-8 mb-3">
             <div class="card">
                 <div class="card-header bg-white">
-                    Create a New Question Option
+                    {{ __('qa_app::question_option.index.header') }}
                 </div>
 
                 <div class="card-body">
                     <x-dc-form route="{{ route('qa_app.question_option.store') }}">  
                        @include('qa_app::question_options._form')
 
-                       <button type="submit" class="btn btn-primary">CREATE</button>
+                       <button type="submit" class="btn btn-primary">{{ __('qa_app::labels.create') }}</button>
                     </x-dc-form> 
                 </div>
             </div>

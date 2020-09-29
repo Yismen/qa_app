@@ -3,6 +3,8 @@
 return [
     'actions' => 'Actions:',
     'edit' => 'Edit',
+    'create' => 'CREATE',
+    'update' => 'UPDATE',
     'details' => 'Details',
     'name' => 'Name:',
     'pass_fail' => 'Passed or Failed:',
@@ -16,6 +18,8 @@ return [
     'question_type' => 'Question Type:',
     'question_option' => 'Question Option:',
     'question_answer' => 'Question Answer:',
+    'question_value' => 'Question Value %:',
+    'question_option_value' => 'Question Option Value %:',
     'total_points' => 'Total Points Possible:',
     'user' => 'User:',
 ];

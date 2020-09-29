@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header bg-white">
                     <h4>
-                        Question Option - {{ $question_option->name }}
-                        <a href="{{ route('qa_app.question_option.index') }}" class="float-right" title="Back to Question Options List">All</a>
+                        {{ __('qa_app::question_option.show.header') }} {{ $question_option->name }}
+                        <a href="{{ route('qa_app.question_option.index') }}" class="float-right" title="Back to Question Options List">{{ __('qa_app::labels.all') }}</a>
                     </h4>
                 </div>
 
@@ -16,11 +16,11 @@
                     <table class="table mb-0">
                         <tbody>
                             <tr>
-                                <th scope="row" class="text-left">Value %</th>
+                                <th scope="row" class="text-left">{{ __('qa_app::labels.question_option_value') }}</th>
                                 <td class="text-right">{{ number_format($question_option->value, 2) }}%</td>
                             </tr>
                             <tr>
-                                <th scope="row" class="text-left">Question Type</th>
+                                <th scope="row" class="text-left">{{ __('qa_app::labels.question_type') }}</th>
                                 <td class="text-right">
                                     <a href="{{ route('qa_app.question_type.show', optional($question_option->questionType)->id) }}" target="_question_type">
                                         {{ optional($question_option->questionType)->name }}
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="card-footer bg-white">
-                    <a href="{{ route('qa_app.question_option.edit', $question_option->id) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route('qa_app.question_option.edit', $question_option->id) }}" class="btn btn-warning">{{ __('qa_app::labels.edit') }}</a>
                 </div>
             </div>
         </div>
