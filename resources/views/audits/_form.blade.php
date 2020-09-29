@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-4 bg-light">
+    <div class="col-sm-6 bg-light">
          <x-dc-select-field
             class="bg-light"
              :field-value="old('form_id', optional($form ?? null)->id)" 
@@ -9,7 +9,7 @@
              readonly="readonly"
          />                        
      </div>
-     <div class="col-sm-4 bg-light">
+     <div class="col-sm-6 bg-light">
           <x-dc-select-field
              class="bg-light"
              :field-value="old('user_id', optional($user ?? null)->id)" 
@@ -19,14 +19,23 @@
              readonly="readonly"
          />
      </div>
-     <div class="col-sm-4">
-         <x-dc-input-field
-             type="date"
-             :field-value="old('production_date', optional($audit ?? null)->production_date)" 
-             field-name="production_date" 
-             label-name="{{ __('qa_app::labels.production_date') }}"
-         />
-     </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <x-dc-input-field
+            type="date"
+            :field-value="old('production_date', optional($audit ?? null)->production_date)" 
+            field-name="production_date" 
+            label-name="{{ __('qa_app::labels.production_date') }}"
+        />
+    </div>
+    <div class="col-sm-6">        
+        <x-dc-input-field
+            :field-value="old('transaction', optional($audit ?? null)->transaction)" 
+            field-name="transaction" 
+            label-name="{{ __('qa_app::labels.transaction') }}"
+        />
+    </div>
 </div>
 <ul class="list-group">
     @foreach ($form->questions as $question)

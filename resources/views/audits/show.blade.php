@@ -31,6 +31,10 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th scope="row" class="text-left">{{ __('qa_app::labels.transaction') }}</th>
+                                <td class="text-right">{{ $audit->transaction }}</td>
+                            </tr>
+                            <tr>
                                 <th scope="row" class="text-left">{{ __('qa_app::labels.total_points') }}</th>
                                 <td class="text-right">{{ $audit->max_points }}</td>
                             </tr>

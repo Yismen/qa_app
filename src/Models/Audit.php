@@ -14,6 +14,7 @@ class Audit extends BaseModel
         'form_id',
         'user_id',
         'production_date',
+        'transaction',
         'max_points',
         'points_goal',
         'passes',

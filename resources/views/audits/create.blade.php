@@ -15,11 +15,11 @@
                     <x-dc-form route="{{ route('qa_app.audit.store') }}">  
                        @include('qa_app::audits._form')
                        
-                    @error('answers')
-                        <p class="text-sm text-danger m-2">
-                            <strong>{{ $message }}</strong>
-                        </p>
-                    @enderror
+                        @error('answers')
+                            <p class="text-sm text-danger m-2">
+                                <strong>{{ $message }}</strong>
+                            </p>
+                        @enderror
                        <button type="submit" class="btn btn-primary mt-3">{{ __('qa_app::audit.create.form.button') }}</button>
                     </x-dc-form> 
                 </div>

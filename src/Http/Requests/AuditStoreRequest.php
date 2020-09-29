@@ -27,6 +27,7 @@ class AuditStoreRequest extends FormRequest
             'form_id' => 'required|exists:qa_app_forms,id',
             'user_id' => 'required|exists:users,id',
             'production_date' => 'required|date',
+            'transaction' => 'required|min:2|unique:qa_app_audits,transaction',
             'answers' => 'required|array',
             'answers.*' => 'required|exists:qa_app_question_options,id',
         ];

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
          <x-dc-select-field
              :field-value="old('form_id', optional($audit ?? null)->form_id)" 
              field-name="form_id" 
@@ -8,7 +8,7 @@
              readonly="readonly"
          />                        
      </div>
-     <div class="col-sm-4">
+     <div class="col-sm-6">
          <x-dc-select-field
              :field-value="old('user_id', optional($audit ?? null)->user_id)" 
              field-name="user_id" 
@@ -17,14 +17,24 @@
              readonly="readonly"
          />     
      </div>
-     <div class="col-sm-4">
-         <x-dc-input-field
-             type="date"
-             :field-value="old('production_date', optional(optional($audit ?? null)->production_date)->format('Y-m-d'))" 
-             field-name="production_date" 
-             label-name="{{ __('qa_app::labels.production_date') }}"
-         />
-     </div>
+</div>
+
+<div class="row">    
+    <div class="col-sm-6">
+        <x-dc-input-field
+            type="date"
+            :field-value="old('production_date', optional(optional($audit ?? null)->production_date)->format('Y-m-d'))" 
+            field-name="production_date" 
+            label-name="{{ __('qa_app::labels.production_date') }}"
+        />
+    </div>
+    <div class="col-sm-6">
+        <x-dc-input-field
+            :field-value="old('transaction', optional($audit ?? null)->transaction)" 
+            field-name="transaction" 
+            label-name="{{ __('qa_app::labels.transaction') }}"
+        />
+    </div>
 </div>
 <ul class="list-group">
     @foreach ($audit->data as $answer)

@@ -65,6 +65,7 @@ class AuditController extends BaseController
         if (Gate::denies('qa_app.is_auditor')) {
             abort(403);
         }
+
         $request->merge(Audit::getAdditionalFields($request));
 
         Audit::create($request->all());

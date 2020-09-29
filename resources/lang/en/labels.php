@@ -21,5 +21,6 @@ return [
     'question_value' => 'Question Value:',
     'question_option_value' => 'Question Option Value %:',
     'total_points' => 'Total Points Possible:',
+    'transaction' => 'Transaction:',
     'user' => 'User:',
 ];

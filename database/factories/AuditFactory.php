@@ -12,6 +12,7 @@ $factory->define(Audit::class, function (Faker $faker) {
         'form_id' => factory(Form::class),
         'user_id' => factory(MockUser::class),
         'production_date' => now(),
+        'transaction' => $faker->bankAccountNumber,
         'max_points' => 30,
         'points' => 28,
         'points_goal' => 25,
