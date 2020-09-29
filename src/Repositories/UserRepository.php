@@ -2,7 +2,6 @@
 
 namespace Dainsys\QAApp\Repositories;
 
-use Dainsys\QAApp\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 
@@ -16,6 +15,7 @@ class UserRepository implements QAAppRepositoryInterface
     public static function list(): SupportCollection
     {
         return resolve('App\User')::orderBy('name')
+            ->role(config('qa_app.roles.user'))
             ->pluck('name', 'id');
     }
 
@@ -27,6 +27,6 @@ class UserRepository implements QAAppRepositoryInterface
     public static function query()
     {
         return resolve('Ap\User')::orderBy('name')
-            ->with('questions');
+            ->role(config('qa_app.roles.user'));
     }
 }
