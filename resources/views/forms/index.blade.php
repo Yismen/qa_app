@@ -6,14 +6,15 @@
         <div class="col-sm-12 col-md-10 col-lg-8 mb-3">
             <div class="card">
                 <div class="card-header bg-white">
-                    Create a New QA Form
+                    {{ __('qa_app::form.index.form.header') }}
                 </div>
 
                 <div class="card-body">
                     <x-dc-form route="{{ route('qa_app.form.store') }}">  
                        @include('qa_app::forms._form')
 
-                       <button type="submit" class="btn btn-primary">CREATE</button>
+                       <button type="submit" class="btn btn-primary">
+                        {{ __('qa_app::form.index.form.button') }}</button>
                     </x-dc-form> 
                 </div>
             </div>

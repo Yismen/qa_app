@@ -6,11 +6,11 @@
         <table class="table table-sm table-inverse table-responsive-sm mb-0">
             <thead class="thead-inverse">
                 <tr>
-                    <th>QA Form:</th>
-                    <th>Questions:</th>
-                    <th>Total Points:</th>
-                    <th>Passing Goal %:</th>
-                    <th>Actions:</th>
+                    <th>{{ __('qa_app::labels.qa_form') }}</th>
+                    <th>{{ __('qa_app::labels.question') }}</th>
+                    <th>{{ __('qa_app::labels.points_possible') }}</th>
+                    <th>{{ __('qa_app::labels.passing_goal') }}</th>
+                    <th>{{ __('qa_app::labels.actions') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,7 @@
                         </td>
                         <td>
                             <a href="{{ route('qa_app.form.edit', $form->id) }}" class="btn btn-warning btn-sm">
-                                Edit
+                                {{ __('qa_app::labels.edit') }}
                             </a>
                         </td>
                     </tr>

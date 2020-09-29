@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header bg-white">
                     <h4>
-                        Edit QA Form - 
+                        {{ __('qa_app::form.edit.form.header') }} 
                         <a href="{{ route('qa_app.form.show', $form->id) }}">{{ $form->name }}</a>
-                        <a href="{{ route('qa_app.form.index') }}" class="float-right" title="Back to QA Forms List">All</a>
+                        <a href="{{ route('qa_app.form.index') }}" class="float-right" title="Back to QA Forms List">{{ __('qa_app::labels.all') }}</a>
                     </h4>
                 </div>
 
@@ -18,7 +18,7 @@
                         @method('PUT')
                         @include('qa_app::forms._form')
 
-                       <button type="submit" class="btn btn-warning">UPDATE</button>    
+                       <button type="submit" class="btn btn-warning">{{ __('qa_app::form.edit.form.button') }}</button>    
                     </x-dc-form> 
                 </div>
             </div>
