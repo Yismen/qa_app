@@ -50,7 +50,7 @@
                                 <th scope="row" class="text-left">{{ __('qa_app::labels.pass_fail') }}</th>
                                 <td class="text-right">
                                     <span class="badge badge-{{ $audit->passes ? 'success' : 'danger'}}">
-                                        {{ $audit->passes ? 'Passed' : 'Failed'}}
+                                        {{ $audit->passes ? __('qa_app::labels.passed') : __('qa_app::labels.failed')}}
                                     </span>
                                 </td>
                             </tr>

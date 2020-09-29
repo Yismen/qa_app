@@ -36,7 +36,7 @@
                             {{ number_format($audit->points, 2) }}
                         </td>
                         <td>
-                            {{ $audit->passes ? 'Passed' : 'Failed' }}
+                            {{ $audit->passes ? __('qa_app::labels.passed') : __('qa_app::labels.failed') }}
                         </td>
                         <td>
                             <a href="{{ route('qa_app.audit.show', $audit->id) }}" class="btn btn-secondary btn-sm">
