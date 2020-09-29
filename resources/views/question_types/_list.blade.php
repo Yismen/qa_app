@@ -1,14 +1,14 @@
 <div class="card">
     <div class="card-header bg-white">
-        <h4>Question Types List</h4>
+        <h4>{{ __('qa_app::question_type.list.header') }}</h4>
     </div>
     <div class="card-body p-0">
         <table class="table table-sm table-inverse table-responsive-sm mb-0">
             <thead class="thead-inverse">
                 <tr>
-                    <th>Question Type:</th>
-                    <th>Question Options:</th>
-                    <th>Actions:</th>
+                    <th>{{ __('qa_app::labels.question_type') }}</th>
+                    <th>{{ __('qa_app::labels.question_option') }}</th>
+                    <th>{{ __('qa_app::labels.actions') }}</th>
                 </tr>
                 </thead>
                 <tbody>

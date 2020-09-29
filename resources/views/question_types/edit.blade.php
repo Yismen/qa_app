@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header bg-white">
                     <h4>
-                        Edit Question Type - 
+                        {{ __('qa_app::question_type.edit.header') }}
                         <a href="{{ route('qa_app.question_type.show', $question_type->id) }}">{{ $question_type->name }}</a>
-                        <a href="{{ route('qa_app.question_type.index') }}" class="float-right" title="Back to Question Types List">All</a>
+                        <a href="{{ route('qa_app.question_type.index') }}" class="float-right" title="Back to Question Types List">{{ __('qa_app::labels.all') }}</a>
                     </h4>
                 </div>
 
@@ -19,15 +19,15 @@
                         <x-dc-input-field-addon
                             :field-value="old('name', optional($question_type ?? null)->name)" 
                             field-name="name" 
-                            label-name="Question Type:"
-                            button-action="SAVE"
+                            label-name="{{ __('qa_app::labels.question_type') }}"
+                            button-action="{{ __('qa_app::question_type.edit.button') }}"
                             btn-class="btn-warning"
                         />      
                     </x-dc-form> 
                 </div>
 
                 <div class="card-footer bg-white">
-                    <h5>Question Options</h5>
+                    <h5>{{ __('qa_app::question_type.show.question_options_header') }}</h5>
                     <ul class="list-group">
                         @foreach ($question_type->questionOptions as $question_option)
                             <li class="list-group-item d-flex justify-content-between align-items-center py-2">

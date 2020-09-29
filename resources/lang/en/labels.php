@@ -13,6 +13,8 @@ return [
     'production_date' => 'Production Date:',
     'qa_form' => 'QA Form:',
     'question' => 'Question:',
+    'question_type' => 'Question Type:',
+    'question_option' => 'Question Option:',
     'question_answer' => 'Question Answer:',
     'total_points' => 'Total Points Possible:',
     'user' => 'User:',
