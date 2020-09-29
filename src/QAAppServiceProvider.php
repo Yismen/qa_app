@@ -26,16 +26,16 @@ class QAAppServiceProvider extends ServiceProvider
         ], 'qa_app.config');
 
         $this->publishes([
-            __DIR__ . '/../migrations/' => resource_path('views/vendor/qa_app'),
-        ], 'qa_app.views');
-
-        $this->publishes([
-            __DIR__ . '/../resources/views/' => resource_path('views/vendor/qa_app'),
+            __DIR__ . '/../database/migrations/' => database_path('migrations'),
         ], 'qa_app.migrations');
 
         $this->publishes([
+            __DIR__ . '/../resources/views/' => resource_path('views/vendor/qa_app'),
+        ], 'qa_app.views');
+
+        $this->publishes([
             __DIR__ . '/../resources/lang' => resource_path('lang/vendor/qa_app'),
-        ]);
+        ], 'qa_app.lang');
 
         $this->registerGates();
     }
