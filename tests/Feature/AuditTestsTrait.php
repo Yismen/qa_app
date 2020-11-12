@@ -2,43 +2,41 @@
 
 namespace Dainsys\QAApp\Tests\Feature;
 
+use Dainsys\Locky\Role;
 use Dainsys\QAApp\Models\Audit;
-use Dainsys\QAApp\Models\Form;
-use Dainsys\QAApp\Models\Question;
-use Dainsys\QAApp\Tests\AppTestCase;
 
-class AuditTests extends AppTestCase
+trait AuditTestsTrait
 {
     /** @test */
-    public function guest_are_not_allowed_to_index()
+    public function guest_are_not_allowed_to_index_audit()
     {
         $this->get(route('qa_app.audit.index'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_show()
+    public function guest_are_not_allowed_to_show_audit()
     {
         $this->get(route('qa_app.audit.show', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_edit()
+    public function guest_are_not_allowed_to_edit_audit()
     {
         $this->get(route('qa_app.audit.edit', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_update()
+    public function guest_are_not_allowed_to_update_audit()
     {
         $this->put(route('qa_app.audit.update', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    // public function guest_are_not_allowed_to_create()
+    // public function guest_are_not_allowed_to_create_audit()
     // {
     //     $user = $this->user();
     //     $form = $this->create(Form::class);
@@ -47,14 +45,14 @@ class AuditTests extends AppTestCase
     // }
 
     /** @test */
-    public function guest_are_not_allowed_to_store()
+    public function guest_are_not_allowed_to_store_audit()
     {
         $this->post(route('qa_app.audit.store'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function unauthorized_users_cant_view_index()
+    public function unauthorized_users_cant_view_index_audit()
     {
         $this->actingAs($this->user());
 
@@ -118,6 +116,8 @@ class AuditTests extends AppTestCase
     /** @test */
     public function it_shows_a_list_of_audits()
     {
+        $this->withoutExceptionHandling();
+        factory(Role::class)->create(['name' => config('qa_app.roles.user')]);
         $this->actingAs($this->authorizedUser(config('qa_app.roles.auditor')));
         $this->create(Audit::class, [], 2);
 

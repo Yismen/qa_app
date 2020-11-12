@@ -4,47 +4,46 @@ namespace Dainsys\QAApp\Tests\Feature;
 
 use Dainsys\QAApp\Models\QuestionOption;
 use Dainsys\QAApp\Repositories\QuestionOptionRepository;
-use Dainsys\QAApp\Tests\AppTestCase;
 
-class QuestionOptionTests extends AppTestCase
+trait QuestionOptionTestsTrait
 {
     /** @test */
-    public function guest_are_not_allowed_to_index()
+    public function guest_are_not_allowed_to_index_question_option()
     {
         $this->get(route('qa_app.question_option.index'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_show()
+    public function guest_are_not_allowed_to_show_question_option()
     {
         $this->get(route('qa_app.question_option.show', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_edit()
+    public function guest_are_not_allowed_to_edit_question_option()
     {
         $this->get(route('qa_app.question_option.edit', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_update()
+    public function guest_are_not_allowed_to_update_question_option()
     {
         $this->put(route('qa_app.question_option.update', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_store()
+    public function guest_are_not_allowed_to_store_question_option()
     {
         $this->post(route('qa_app.question_option.store'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function it_validates_fields_are_required()
+    public function it_validates_fields_are_required_question_option()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(QuestionOption::class, ['name' => '', 'value' => '', 'question_type_id' => '']);
@@ -62,7 +61,7 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_fields_must_be_unique()
+    public function it_validates_fields_must_be_unique_question_option()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $question_option = $this->create(QuestionOption::class);
@@ -81,7 +80,7 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_fields_exists()
+    public function it_validates_fields_exists_question_option()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(QuestionOption::class, ['question_type_id' => 444]);
@@ -95,7 +94,7 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_numeric()
+    public function it_validates_numeric_question_option()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(QuestionOption::class, ['value' => 'Not Numeric']);
@@ -109,7 +108,7 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_min_number()
+    public function it_validates_min_number_question_option()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(QuestionOption::class, ['value' => -0.1]);
@@ -123,7 +122,7 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_max_number()
+    public function it_validates_max_number_question_option()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(QuestionOption::class, ['value' => 1.1]);
@@ -137,7 +136,7 @@ class QuestionOptionTests extends AppTestCase
     }
 
     /** @test */
-    public function unauthorized_users_cant_view_index()
+    public function unauthorized_users_cant_view_index_question_option()
     {
         $this->actingAs($this->user());
 

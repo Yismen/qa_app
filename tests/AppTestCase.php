@@ -2,19 +2,13 @@
 
 namespace Dainsys\QAApp\Tests;
 
+use App\User;
 use Dainsys\Components\ComponentsServiceProvider;
 use Dainsys\QAApp\QAAppServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Ui\UiServiceProvider;
 use Orchestra\Testbench\TestCase;
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-
-use App\User;
 use Dainsys\Locky\LockyServiceProvider;
-use Dainsys\Locky\Role;
-use Faker\Generator as Faker;
-use Illuminate\Support\Str;
 use Spatie\Permission\PermissionServiceProvider;
 
 class AppTestCase extends TestCase
@@ -25,10 +19,6 @@ class AppTestCase extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->app->bind('App\User', function () {
-            return MockUser::class;
-        });
 
         $this->withFactories(__DIR__ . '/../database/factories');
         $this->withFactories(__DIR__ . '/factories');
@@ -51,12 +41,12 @@ class AppTestCase extends TestCase
 
     public function user()
     {
-        return factory(app('App\User'))->create();
+        return factory(User::class)->create();
     }
 
     public function authorizedUser($role)
     {
-        $user = factory(app('App\User'))->create();
+        $user = factory(User::class)->create();
 
         $user->roles()->create([
             'name' => $role

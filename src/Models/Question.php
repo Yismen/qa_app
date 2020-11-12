@@ -3,7 +3,6 @@
 namespace Dainsys\QAApp\Models;
 
 use Dainsys\QAApp\Repositories\FormRepository;
-use Dainsys\QAApp\Repositories\QuestionOptionRepository;
 use Dainsys\QAApp\Repositories\QuestionTypeRepository;
 
 class Question extends BaseModel

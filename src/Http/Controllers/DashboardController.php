@@ -10,10 +10,6 @@ class DashboardController extends BaseController
     }
     public function user()
     {
-        return view('qa_app::dashboards.admin');
-    }
-    public function form()
-    {
-        return view('qa_app::dashboards.admin');
+        return view('qa_app::dashboards.user');
     }
 }

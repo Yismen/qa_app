@@ -2,9 +2,8 @@
 
 namespace Dainsys\QAApp\Models;
 
+use App\User;
 use Dainsys\QAApp\Models\Traits\AuditableTrait;
-use Dainsys\QAApp\Repositories\FormRepository;
-use Dainsys\QAApp\Repositories\UserRepository;
 
 class Audit extends BaseModel
 {
@@ -37,7 +36,7 @@ class Audit extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo(resolve('App\User'));
+        return $this->belongsTo(User::class);
     }
 
     public function form()

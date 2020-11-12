@@ -1,13 +1,13 @@
 <?php
 
-namespace Dainsys\QAApp\Tests;
+namespace App;
 
 use Dainsys\Locky\WithLockyAcl;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class MockUser extends Authenticatable
+class User extends Authenticatable
 {
     use Notifiable;
     use WithLockyAcl;
@@ -38,6 +38,4 @@ class MockUser extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    protected $table = 'users';
 }

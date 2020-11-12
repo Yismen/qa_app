@@ -8,7 +8,6 @@ Route::prefix('qa_app')
     ->group(function () {
         Route::get('/', 'DashboardController@admin')->name('qa_app.dashboard.admin');
         Route::get('dashboard/user/{id}', 'DashboardController@user')->name('qa_app.dashboard.user');
-        Route::get('dashboard/qa_form/{id}', 'DashboardController@form')->name('qa_app.dashboard.qa_form');
 
         Route::resource('question_type', 'QuestionTypeController')->except(['create', 'destroy'])->names('qa_app.question_type');
 

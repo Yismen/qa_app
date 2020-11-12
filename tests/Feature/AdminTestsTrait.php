@@ -2,21 +2,19 @@
 
 namespace Dainsys\QAApp\Tests\Feature;
 
-use Dainsys\QAApp\Tests\AppTestCase;
-
-class AdminTests extends AppTestCase
+trait AdminTestsTrait
 {
     /** @test */
-    public function guest_are_not_allowed()
+    public function guest_are_not_allowed_on_admin()
     {
-        $this->get(route('qa_app.dashboards.admin'))
+        $this->get(route('qa_app.dashboard.admin'))
             ->assertRedirect(route('login'));
     }
     /** @test */
     public function it_shows_damin_dashboard()
     {
         $this->actingAs($this->user());
-        $this->get('/qa_app/admin')
+        $this->get(route('qa_app.dashboard.admin'))
             ->assertViewIs('qa_app::dashboards.admin');
     }
 }

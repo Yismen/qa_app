@@ -4,7 +4,6 @@ namespace Dainsys\QAApp\Repositories;
 
 use Dainsys\QAApp\Models\Audit;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as SupportCollection;
 
 class AuditRepository
 {

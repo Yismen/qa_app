@@ -2,6 +2,7 @@
 
 namespace Dainsys\QAApp\Http\Controllers;
 
+use App\User;
 use Dainsys\QAApp\Http\Requests\AuditCreateRequest;
 use Dainsys\QAApp\Http\Requests\AuditStoreRequest;
 use Dainsys\QAApp\Http\Requests\AuditUpdateRequest;
@@ -56,7 +57,7 @@ class AuditController extends BaseController
 
         return view('qa_app::audits.create', [
             'form' => Form::find($form_id)->load('questions.questionType.questionOptions'),
-            'user' => resolve('App\User')::find($user_id)
+            'user' => User::find($user_id)
         ]);
     }
 

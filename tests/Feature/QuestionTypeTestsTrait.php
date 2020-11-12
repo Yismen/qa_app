@@ -4,47 +4,46 @@ namespace Dainsys\QAApp\Tests\Feature;
 
 use Dainsys\QAApp\Models\QuestionType;
 use Dainsys\QAApp\Repositories\QuestionTypeRepository;
-use Dainsys\QAApp\Tests\AppTestCase;
 
-class QuestionTypeTests extends AppTestCase
+trait QuestionTypeTestsTrait
 {
     /** @test */
-    public function guest_are_not_allowed_to_index()
+    public function guest_are_not_allowed_to_index_question_type()
     {
         $this->get(route('qa_app.question_type.index'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_show()
+    public function guest_are_not_allowed_to_show_question_type()
     {
         $this->get(route('qa_app.question_type.show', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_edit()
+    public function guest_are_not_allowed_to_edit_question_type()
     {
         $this->get(route('qa_app.question_type.edit', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_update()
+    public function guest_are_not_allowed_to_update_question_type()
     {
         $this->put(route('qa_app.question_type.update', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_store()
+    public function guest_are_not_allowed_to_store_question_type()
     {
         $this->post(route('qa_app.question_type.store'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function unauthorized_users_cant_view_index()
+    public function unauthorized_users_cant_view_index_question_type()
     {
         $this->actingAs($this->user());
 

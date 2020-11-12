@@ -4,47 +4,46 @@ namespace Dainsys\QAApp\Tests\Feature;
 
 use Dainsys\QAApp\Models\Form;
 use Dainsys\QAApp\Repositories\FormRepository;
-use Dainsys\QAApp\Tests\AppTestCase;
 
-class FormTests extends AppTestCase
+trait FormTestsTrait
 {
     /** @test */
-    public function guest_are_not_allowed_to_index()
+    public function guest_are_not_allowed_to_index_form()
     {
         $this->get(route('qa_app.form.index'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_show()
+    public function guest_are_not_allowed_to_show_form()
     {
         $this->get(route('qa_app.form.show', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_edit()
+    public function guest_are_not_allowed_to_edit_form()
     {
         $this->get(route('qa_app.form.edit', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_update()
+    public function guest_are_not_allowed_to_update_form()
     {
         $this->put(route('qa_app.form.update', 1))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function guest_are_not_allowed_to_store()
+    public function guest_are_not_allowed_to_store_form()
     {
         $this->post(route('qa_app.form.store'))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function it_validates_fields_are_required()
+    public function it_validates_fields_are_required_form()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(Form::class, ['name' => '', 'goal_percentage' => '']);
@@ -60,7 +59,7 @@ class FormTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_fields_must_be_unique()
+    public function it_validates_fields_must_be_unique_form()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $form = $this->create(Form::class);
@@ -79,7 +78,7 @@ class FormTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_numeric()
+    public function it_validates_numeric_form()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(Form::class, ['goal_percentage' => 'Not Numeric']);
@@ -93,7 +92,7 @@ class FormTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_min_number()
+    public function it_validates_min_number_form()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(Form::class, ['goal_percentage' => -0.1]);
@@ -107,7 +106,7 @@ class FormTests extends AppTestCase
     }
 
     /** @test */
-    public function it_validates_max_number()
+    public function it_validates_max_number_form()
     {
         $this->actingAs($this->authorizedUser(config('qa_app.roles.admin')));
         $attributes = $this->make(Form::class, ['goal_percentage' => 100.1]);
@@ -121,7 +120,7 @@ class FormTests extends AppTestCase
     }
 
     /** @test */
-    public function unauthorized_users_cant_view_index()
+    public function unauthorized_users_cant_view_index_form()
     {
         $this->actingAs($this->user());
 

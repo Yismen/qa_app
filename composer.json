@@ -33,7 +33,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Dainsys\\QAApp\\Tests\\": "./tests/"
+            "Dainsys\\QAApp\\Tests\\": "./tests/",
+            "App\\": "./tests/app"
         }
     }
 }
