@@ -37,18 +37,20 @@
     </div>
 </div>
 <ul class="list-group">
-    @foreach ($audit->data as $answer)
-    @php $field = 'answers.' . $answer->question->id @endphp 
-     <li class="list-group-item py-2">                                
-         <x-dc-select-field
-             :field-value="old($field, optional($answer->answer ?? null)->id)" 
-             field-name="answers[{{ $answer->question->id }}]" 
-             label-name="{{ $answer->question->text }}:"
-             :data-array="$answer->question->questionOptionsList"
-         />    
-         @error($field)
-             <strong class="text-danger">{{ $message }}</strong>
-         @enderror
-     </li>                               
-    @endforeach
+    @if ($audit->data)
+        @foreach ($audit->data as $answer)
+            @php $field = 'answers.' . $answer->question->id @endphp 
+            <li class="list-group-item py-2">                                
+                <x-dc-select-field
+                    :field-value="old($field, optional($answer->answer ?? null)->id)" 
+                    field-name="answers[{{ $answer->question->id }}]" 
+                    label-name="{{ $answer->question->text }}:"
+                    :data-array="$answer->question->questionOptionsList"
+                />    
+                @error($field)
+                    <strong class="text-danger">{{ $message }}</strong>
+                @enderror
+            </li>                               
+        @endforeach
+    @endif
 </ul>
