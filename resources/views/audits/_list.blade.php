@@ -19,13 +19,15 @@
                         @foreach ($audits as $audit)
                         <tr class="{{ $audit->passes  ? '' : 'text-danger'}}">
                             <td scope="row">
-                                <a href="{{ route('qa_app.dashboard.admin', ['production_date' => $audit->production_date->format('Y-m-d')]) }}" target="__dashboard">
+                                {{-- <a href="{{ route('qa_app.dashboard.admin', ['production_date' => $audit->production_date->format('Y-m-d')]) }}" target="__dashboard">
                                     {{ $audit->production_date->format('Y-M-d') }}
-                                </a>
+                                </a> --}}
+                                
+                                {{ $audit->production_date->format('Y-M-d') }}
                             </td>
                             <td>
-                                <a href="{{ route('qa_app.dashboard.user', optional($audit->user)->id) }}" target="__dashboard">
-                                    {{ optional($audit->user)->name }}
+                                <a href="{{ route('qa_app.dashboard.admin', ['user_id' => $audit->user->id]) }}" target="__dashboard">
+                                    {{ $audit->user->name }}
                                 </a>
                             </td>
                             <td>
