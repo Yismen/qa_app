@@ -3,6 +3,7 @@
 namespace Dainsys\QAApp\Repositories\Dashboard;
 
 use Carbon\Carbon;
+use Dainsys\QAApp\Charts\AuditChart;
 use Dainsys\QAApp\Models\Audit;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,6 +11,34 @@ use Illuminate\Support\Facades\DB;
 
 abstract class AuditBaseRepository
 {
+    /**
+     * Chartjs Chart Options
+     *
+     * @var array
+     */
+    protected static $chart_options = [
+        'responsive' => true,
+        'tooltips' => [
+            'intersect' => false,
+            'mode' => 'nearest'
+        ],
+    ];
+
+    /**
+     * Chart Common goal colors
+     *
+     * @var array
+     */
+    protected static $dataset_colors = [
+        'goal' => [
+            'line' => 'rgba(244,67,54,1)',
+            'background' => 'rgba(244,67,54,.25)'
+        ],
+        'result' => [
+            'line' => 'rgba(1,87,155 ,1)',
+            'background' => 'rgba(1,87,155 ,.35)'
+        ]
+    ];
     /**
      * Build the Query
      *
@@ -22,7 +51,7 @@ abstract class AuditBaseRepository
     {
         $query = self::getQuery($format, $from, $period_name);
 
-        if ($audit_form = request('audit_form')) {
+        if ($audit_form = request('form_id')) {
             $query->where('form_id', $audit_form);
         }
 
@@ -39,6 +68,13 @@ abstract class AuditBaseRepository
      * @return void
      */
     abstract public static function apply(int $periods = 8): Collection;
+
+    /**
+     * Abstract function child class must call.
+     *
+     * @return void
+     */
+    abstract public static function chart(): AuditChart;
 
     /**
      * Abstracted logic to build the query

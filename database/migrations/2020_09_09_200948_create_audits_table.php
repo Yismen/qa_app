@@ -15,11 +15,10 @@ class CreateAuditsTable extends Migration
      */
     public function up()
     {
-        $user = resolve('App\User');
-        Schema::create('qa_app_audits', function (Blueprint $table) use ($user) {
+        Schema::create('qa_app_audits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('form_id')->constrained((new Form())->getTable());
-            $table->foreignId('user_id')->constrained((new $user)->getTable());
+            $table->foreignId('user_id')->constrained((new User())->getTable());
             $table->date('production_date');
             $table->double('max_points', 15, 8)->nullable();
             $table->double('points', 15, 8)->nullable();

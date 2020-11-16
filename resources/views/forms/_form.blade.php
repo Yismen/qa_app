@@ -9,7 +9,7 @@
     <div class="col-sm-12 col-lg-5 col-xl-4">
         <x-dc-input-field 
             type="number"
-            step="0.05"
+            step="0.01"
             min="0"
             max="1"
             :field-value="old('goal_percentage', optional($question_option ?? null)->goal_percentage)" 
