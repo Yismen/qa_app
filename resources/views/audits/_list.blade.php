@@ -29,7 +29,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('qa_app.dashboard.admin', ['qa_form' => $audit->form->id]) }}" target="__dashboard">
+                                <a href="{{ route('qa_app.dashboard.admin', ['form_id' => $audit->form->id]) }}" target="__dashboard">
                                     {{ $audit->form->name }}
                                 </a>
                             </td>

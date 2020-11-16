@@ -27,7 +27,7 @@ class UserRepository implements QAAppRepositoryInterface
 
     public static function query()
     {
-        return resolve('Ap\User')::orderBy('name')
+        return User::orderBy('name')
             ->role(config('qa_app.roles.user'));
     }
 }
